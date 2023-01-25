@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>MobileNet Image Classify</title>
+  <link rel="stylesheet" href="./style.css">
+
+  <style>
+
+      h3 {
+  margin-left: 15px;
+}
+
+.fileInput {
+  margin: 15px;
+  cursor: pointer;
+  color: rgba(0,0,0,0);
+  width: 88px;
+  border: 1px solid #ccc;
+  display: inline-block;
+  padding: 6px 12px;
+}
+
+.imgPreview {
+  text-align: center;
+  margin: 5px 15px;
+  height: 200px;
+  width: 500px;
+  border-left: 1px solid #808080;
+  border-right: 1px solid #808080;
+  border-top: 5px solid #808080;
+  border-bottom: 5px solid #808080;
+}
+.imgPreview img {
+
+  height: 100%;
+}
+.previewText {
+  width: 100%;
+  margin-top: 20px;
+}
+.submitButton {
+  padding: 12px;
+  margin-left: 10px;
+  background: #fff;
+  border: 4px solid #d3d3d3;
+  border-radius: 15px;
+  font-weight: 700;
+  font-size: 10pt;
+  cursor: pointer;
+}
+.submitButton:hover {
+  background: #efefef;
+}
+.centerText {
+  text-align: center;
+  width: 500px;
+}
+  </style>
+</head>
+<body>
+<!--------------------------------------------Code from Jeff Heaton---------------------------------------------------------------------------------->
+<!-- partial:index.partial.html -->
+
+<h3>Retina Disease Classifier</h3>
+<div id="mainApp"></div>
+<!-- partial -->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react-dom.min.js'></script>
+<script  src="./script.js"></script>
+
+</body>
+
+<script>
+    class ImageUpload extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { file: '', imagePreviewUrl: '', message: '' };
+  }
+
+  _handleSubmit(e) {
+    e.preventDefault();
+    return new Promise((resolve, reject) => {
+      let imageFormData = new FormData();
+  
+      imageFormData.append('image', this.state.file);
+      
+      var xhr = new XMLHttpRequest();
+      var z = this;
+      
+      xhr.open('post', '/api/image', true);
+      
+      xhr.onload = function () {
+        if (this.status == 200) {
+          var msg = JSON.parse(this.response)
+          console.log("**" + msg.pred[0].name + msg.pred[0].prob)
+          var prob = Math.round(msg.pred[0].prob * 100)
+          z.setState({message:`Recognized "${msg.pred[0].name}", probability: ${prob}%.`})
+          resolve(this.response);
+        } else {
+          reject(this.statusText);
+        }
+      };
+      
+      xhr.send(imageFormData);
+  
+    });
+  }
+
+  _handleImageChange(e) {
+    e.preventDefault();
+
+    let reader = new FileReader();
+    let file = e.target.files[0];
+
+    reader.onloadend = () => {
+      this.setState({
+        file: file,
+        message: '',
+        imagePreviewUrl: reader.result });
+    };
+
+    reader.readAsDataURL(file);
+  }
+
+  render() {
+    let { imagePreviewUrl } = this.state;
+    let $imagePreview = null;
+    if (imagePreviewUrl) {
+      $imagePreview = React.createElement("img", { src: imagePreviewUrl });
+    } else {
+      $imagePreview = React.createElement("div", { className: "previewText"}, "Upload A Funduscopic Image for Preview");
+    }
+
+    return (
+      React.createElement("div", { className: "previewComponent" },
+      React.createElement("form", { onSubmit: e => this._handleSubmit(e) },
+      React.createElement("input", { className: "fileInput",
+        type: "file",
+        onChange: e => this._handleImageChange(e) }),
+      React.createElement("button", { className: "submitButton",
+        type: "submit",
+        onClick: e => this._handleSubmit(e) }, "Recognize Image")),
+      React.createElement("div", { className: "imgPreview" },$imagePreview),
+      React.createElement("span", {}, this.state.message),
+      )
+      );
+  }}
+
+
+ReactDOM.render(React.createElement(ImageUpload, null), document.getElementById("mainApp"));
+
+</script>
+</html>
