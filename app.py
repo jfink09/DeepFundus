@@ -16,7 +16,7 @@ class_names = ['CRVO',
   'Myelinated Nerve Fiber',
   'Normal',
   'Pathological Mypoia',
-  'Retinitis Pigmentosa'])
+  'Retinitis Pigmentosa']
 
 ### 2. Model and transforms preparation ###
 
