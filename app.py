@@ -13,6 +13,7 @@ class_names = ['CRVO',
   'Diabetic Retinopathy',
   'Laser Spots',
   'Macular Degeneration',
+  'Macular Hole',
   'Myelinated Nerve Fiber',
   'Normal',
   'Pathological Mypoia',
@@ -73,7 +74,7 @@ example_list = [["examples/" + example] for example in os.listdir("examples")]
 # Create the Gradio demo
 demo = gr.Interface(fn=predict, # mapping function from input to output
                     inputs=gr.Image(type="pil"), # what are the inputs?
-                    outputs=[gr.Label(num_top_classes=9, label="Predictions"), # what are the outputs?
+                    outputs=[gr.Label(num_top_classes=10, label="Predictions"), # what are the outputs?
                              gr.Number(label="Prediction time (s)")], # our fn has two outputs, therefore we have two outputs
                     # Create examples list from "examples/" directory
                     examples=example_list, 
