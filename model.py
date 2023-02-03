@@ -3,7 +3,7 @@ import torchvision
 
 from torch import nn
 
-def create_resnet50_model(num_classes:int=9, # 4
+def create_resnet50_model(num_classes:int=10, # 4
                           seed:int=42):
     """Creates an ResNet50 feature extractor model and transforms.
 
