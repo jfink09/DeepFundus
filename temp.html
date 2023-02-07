@@ -1,0 +1,257 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+		<title>DeepFundus</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="keywords" content="">
+		<meta name="description" content="">
+
+		<link rel="stylesheet" href="assets/css/animate.min.css">
+		<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+		<link rel="stylesheet" href="assets/css/font-awesome.min.css">
+		<link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,700,800' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" href="assets/css/style.css">
+
+		<style>
+			</style>
+	</head>
+
+	<body>
+		<div class="preloader">
+			<div class="sk-spinner sk-spinner-rotating-plane"></div>
+		</div>
+		<nav class="navbar navbar-default navbar-fixed-top templatemo-nav" role="navigation">
+			<div class="container">
+				<div class="navbar-header">
+					<button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+						<span class="icon icon-bar"></span>
+						<span class="icon icon-bar"></span>
+						<span class="icon icon-bar"></span>
+					</button>
+					<a href="#" class="navbar-brand">DeepFundus</a>
+				</div>
+				<div class="collapse navbar-collapse">
+					<ul class="nav navbar-nav navbar-right text-uppercase">
+						<li><a href="#home">Home</a></li>
+						<li><a href="#model">Model</a></li>
+						<li><a href="#experiment">Experimentation</a></li>
+						<li><a href="#improvements">Improvements</a></li>
+						<li><a href="#predictions">Predictions</a></li>
+						<li><a href="#contact">Contact</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+
+		<section id="home">
+			<div class="overlay">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-1"></div>
+						<div class="col-md-10 wow fadeIn" data-wow-delay="0.3s">
+							<h1 class="text-upper">Fundus Image Convolutional Neural Network</h1>
+							<p class="white">Diagnose Fundus Images with PyTorch Computer Vision</p>
+							<img src="assets/img/tinyvgg.png" class="img-responsive img-rounded" alt="home img" style="height: 400px; pointer-events: none;">
+							<p style="color: #fff;">[1]: Visualization from: <a href="https://poloclub.github.io/cnn-explainer/" target="_blank" style="color: #fff">https://poloclub.github.io/cnn-explainer/</a></p>
+						</div>
+						<div class="col-md-1"></div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<br><br><br><br><br>
+		<section id="model">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6 wow fadeInLeft" data-wow-delay="0.6s" style="background-color: #000029; border-radius: 1em; box-shadow: -1px -1px 7px #34346470, 3px 3px 5px #13134870; color: #fff;">
+						<h2 class="text-uppercase">About The Model</h2>
+						<p>This website allows users to upload a fundus images and learn about it. The image is ran through a convolutional neural network (CNN) 
+							which is an algorithm that recognizes patterns in data, often image data. It learns about these patterns by turning the image data into 
+							tensors that is passed through various layers of the network where computations are performed to predict what the image is supposed to 
+							be by assigning a probability value between 0 and 1 to it and outputting the name of the disease with the highest probability. 
+							I experimented with multiple CNNs starting with TinyVGG<sup>1</sup>. I also tried EfficientNet models and finally came to the model I 
+							am currently using which is the ResNet50 model. The model's architecture is shown to the right.
+							<br><br>
+							Once I can get a strong model that predicts diseases from fundus images with over 90% 
+							accuracy, I also want to train a model for optical coherence tomography (OCT) images. I aspire to create the largest platform for 
+							learning about retinal images. <!--I plan to eventually have the reason's for the model's predictions pointed out on user uploaded images 
+							to show why the model assigned a given diagnosis to the images. I want to also include information regarding the disease useful to 
+							students and others interested in learning about retinal diseases. This would include what is necessary for a human to diagnose and 
+							treat the disease. It would also include information such as symptoms patient's typically experience with the disease and how to come up 
+							with treatment plans to follow patient's.-->
+							<!--<br><br>
+							In the following sections, I will go into great detail regarding what I have done regarding experimentation to improve the accuracy 
+							of the model, improvements I have made along the way, more about how the predictions work, and what I have tried regarding model 
+							deployment. I also have a section about how I plan to improve my model and get its test accuracy to over 90% as well as how I can 
+							potentially commercialize the model to be used in the real world.-->
+							<!--This 
+							CNN consists of two blocks made up of two 2-D convolutional layers that turn the image data into a tensor of outputs, two ReLU layers 
+							that apply a rectified linear unit function such that all negative inputs are converted to 0 as an output and all positive values 
+							increase linearly, and a 2-D max pooling layer. The ReLU layer performs well on non-linear data by applying nonlinearity. The max 
+							pooling layer reduces dimensionality of images by reducing the number of pixels in the output from the previous convolutional layer. 
+							These layers are usually added after convolutional layers. Finally, TinyVGG finishes with a classifer block that contains a flatten 
+							layer to flatten the dimensions into a tensor and a linear layer to get the outputs. This model performed poorly on my type of data, 
+							so I needed to switch models. Even with data augmentation, the model did not perform well.
+							<br><br>
+							After experimenting with TinyVGG, I decided to try applying transfer learning. I tried this with EfficientNet models such as 
+							EfficientNet-B0, EfficientNet-B2, EfficientNet-B7, and EfficinetNet-V2_L. EfficientNet is discussed thoughroughly in Mingxing Tan and 
+							Quoc V. Le's paper with Cornell University<sup>2</sup>. Finally, I came to the model I am currently working with, and that is ResNet50. 
+							So far, I found that this model performed best on my data, although it trains slowly. I have seen ResNet50 used in many medical imaging 
+							projects including projects within opththalmology. The image to the right is from my Python script showing what the ResNet50 
+							architecture looks like. ResNet50 is a 50 layer CNN that contains 48 convolutional layers, a max pooling layer that takes the maximum 
+							pixel value in a given batch, and an average pooling layer that takes the average value of all pixels in a given batch. This model
+							performed significantly better (over 98% training accuracy and over 70% test accuracy), but there is still a lot of room for improvement 
+							and experimentation to increase the test accuracy and overall performance of my model. I started with predicting diabetic retinopathy 
+							and have since increased the number of classes to 9 different diseases and a normal class. The diseases I currently am training the model 
+							on is diabetic retinopathy, pathological myopia, macular degeneration (dry and wet is combined for now), retinitis pigmentosa, macular hole, 
+							myelinated nerve fiber, choroidal nevus, central retinal vein occlusion (CRVO), and laser spots which is not a disease, but appears different 
+							from normal fundus images.-->
+							
+						</p>
+						<!--<p style="font-size: 10px; text-align: left; padding-left: 2em; color: rgba(255, 255, 255, 0.487);">[2]: 
+							EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks. Available from: <a href="https://arxiv.org/pdf/1905.11946.pdf" target="_blank" style="color: rgba(255, 255, 255, 0.487);">https://arxiv.org/pdf/1905.11946.pdf</a> [accessed 15 Nov, 2022]
+					</p>-->
+					<p style="font-size: 5px; text-align: left; padding-left: 2em; color: rgba(255, 255, 255, 0.487);">[2]: 
+						ResNet50: Residual convolutional neural network for predicting response of transarterial chemoembolization in hepatocellular carcinoma from CT imaging - Scientific Figure on ResearchGate. Available from: <a href="https://www.researchgate.net/figure/The-architecture-of-ResNet50-and-deep-learning-model-flowchart-a-b-Architecture-of_fig1_334767096" target="_blank" style="color: rgba(255, 255, 255, 0.487);">
+							https://www.researchgate.net/figure/The-architecture-of-ResNet50-and-deep-learning-model-flowchart-a-b-Architecture-of_fig1_334767096</a>  [accessed 7 Feb, 2023]
+				</p>
+					</div>
+					<div class="col-md-6 wow fadeInRight" data-wow-delay="0.6s">
+						<img src="assets/img/resnet50.png" class="img-responsive img-rounded" alt="feature img" style="pointer-events: none;"><p style="color: #fff;">[2]</p>
+					</div>
+				</div>
+			</div>
+		</section>
+		<br><br><br><br><br>
+		<section id="experiment">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6 wow fadeInUp" data-wow-delay="0.6s">
+						<img src="assets/img/stats.png" class="img-responsive img-rounded" alt="feature img" style="height: 300px;"><p style="color: #fff;"></p>
+					</div>
+					<div class="col-md-6 wow fadeInUp" data-wow-delay="0.6s" style="background-color: #000029; border-radius: 1em; box-shadow: -1px -1px 7px #34346470, 3px 3px 5px #13134870; color: #fff; color: #fff;">
+						<h2 class="text-uppercase">Experimentation with TinyVGG</h2>
+						<p>I tried the TinyVGG architecture which consists of an input layer, convolutional
+							layers that contain the learned kernels (weights) that looks for features in images that are different from one another. A convolutional
+							neuron performs elementwise dot product operations with a unique kernel and the output of the previous layer's corresponding neuron. TinyVGG 
+							also containes the ReLU activation function to apply non-linearity which increases the accuracy of the model. There are max-pooling layers that use
+							a 2x2 kernel and a stride of 2 to discard activations that make TinyVGG computationally efficient and avoids overfitting. Finally, a flatten 
+							layer is included to conver 3-D layers into 1-D vectors. I tested this model with and without data augmentation and discovered even with augmentation,
+						the model needed a different architecture to perform well for these types of images. I also found from a research paper from Andreas Steiner et. al. at Cornell
+					University, that transfer learning should be used over data augmentation<sup>3</sup>. This is why I tried transfer learning next.</p>
+							<p style="font-size: 10px; text-align: left; padding-left: 2em; color: rgba(255, 255, 255, 0.487);">[3]: How to train your ViT? Data, Augmentation,
+								and Regularization in Vision Transformers. Available from: <a href="https://arxiv.org/pdf/2106.10270.pdf" target="_blank" style="color: rgba(255, 255, 255, 0.487);">https://arxiv.org/pdf/2106.10270.pdf</a> [accessed 15 Nov, 2022]
+					</div>
+				</div>
+			</div>
+		</section>
+		<br><br><br><br><br>
+		<section id="improvements" style="background-color: #000029;">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6 wow fadeInLeft" data-wow-delay="0.6s" style="background-color: #000029; border-radius: 1em; box-shadow: -1px -1px 7px #34346470, 3px 3px 5px #13134870; color: #fff; color: #fff;">
+						<h2 class="text-uppercase">Data Augmentation or Transfer Learning</h2>
+						<p>
+							Although data augmentation can improve a model's accuracy, I found that transfer learning was better suited for my particular model.
+							Transfer learning takes a model that was already trained with similar data and applying it to your own dataset. Transfer learning takes
+							the learned weights from an already trained model, and uses them as a foundation to discover more accurate weights for your own data. This 
+							not only increased the accuracy of my model, but it also decreased the time it took to train with my own data. I will continue to imporve upon
+							this model with diabetic retinopathy images before expanding the dataset and adding classes. Transfer learning also allowed me to improve my
+							model without a huge dataset. I am currently working with 189 images between my training and testing data. The image to the right is from my 
+							TinyVGG model with data augmentation. It shows some of the ways in which data can be augmented for training to try to improve a model. I found
+							the PyTorch documentation to be a good starting point for seeing how transfer learning can be applied in PyTorch<sup>4</sup>.
+						</p>
+            <p style="font-size: 10px; text-align: left; padding-left: 2em; color: rgba(255, 255, 255, 0.487);">[4]: 
+				Pre-trained models and weights - <a href="https://pytorch.org/vision/stable/models.html" target="_blank" style="color: rgba(255, 255, 255, 0.487);">https://pytorch.org/vision/stable/models.html</a>
+      </p>
+					</div>
+					<div class="col-md-6 wow fadeInRight" data-wow-delay="0.6s">
+						<img src="assets/img/augmentation.png" class="img-responsive img-rounded" alt="feature img" style="height: 600px;">
+					</div>
+				</div>
+			</div>
+		</section>
+		<br><br><br><br><br>
+		<section id="predictions">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6 wow fadeInUp" data-wow-delay="0.6s">
+						<img src="assets/img/predprobs.png" class="img-responsive img-rounded" alt="feature img" style="height: 600px;"><p style="color: #fff;"></p>
+					</div>
+					<div class="col-md-6 wow fadeInUp" data-wow-delay="0.6s" style="background-color: #000029; border-radius: 1em; box-shadow: -1px -1px 7px #34346470, 3px 3px 5px #13134870; color: #fff; color: #fff;">
+						<h2 class="text-uppercase">Prediction Probabilities on Three Random Images From The Test Set</h2>
+						<p>To test how well the model performs qualitatively, I tested it by making predictions on images from the test set which consists of
+							images not seen by the model since they are not part of the training set. By looking at the image to the left, we can see that the model 
+							from transfer learning performed significantly better than the TinyVGG model with and without data augmentation. The prediction on these
+							three were correct predictions. Finally, when the model was tested with new custom images not in either the training or test sets, the model 
+							performed well. Image [5] was correctly predicted to have diabetic retinopathy and image [6] was correctly predicted to be grossly normal. After 
+							this model is further improved, and I learn how to deploy the model onto this website, I will add more diseases (classes) to train, test, and predict 
+							with to increase the usefulness of the model. Once I test on a bulk of the most common diseases, I will attempt to build similar models for optical 
+							coherence tomography (OCT) images and OCULUS Pentacam images.
+						</p>
+							<!--<p style="font-size: 5px; text-align: left; padding-left: 2em; color: rgba(255, 255, 255, 0.487);">[1] and [2] from: Aortic Shear Stress in Bicuspid Aortic Valve Patients with Stenosis and Insufficiency - 
+								Scientific Figure on ResearchGate. Available from: https://www.researchgate.net/figure/Representative-
+								Images-and-Analytical-Planes-for-4D-Flow-MRI-AAo-indicated-ascending_fig1_313590220 [accessed 4 Sep, 2022]
+							<br>
+						[3] from: Incidental Non-Cardiac Findings of a Coronary Angiography with a 128-Slice Multi-Detector CT Scanner: 
+						Should We Only Concentrate on the Heart? - Scientific Figure on ResearchGate. Available from: https://www.researchgate.net
+						/figure/Aneurysm-of-ascending-aorta-measuring-4748-cm-incidentally-found-in-62-year-old-man_fig5_40834553 [accessed 4 Sep, 2022]</p>-->
+					</div>
+				</div>
+			</div>
+		</section>
+		<br><br>
+		<section id="predictions">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6 wow fadeInUp" data-wow-delay="0.6s">
+						<img src="assets/img/744prob.png" class="img-responsive img-rounded" alt="feature img" style="height: 400px;"><p style="color: #fff;">[5]</p>
+					</div>
+					<div class="col-md-6 wow fadeInUp" data-wow-delay="0.6s">
+					<img src="assets/img/935prob.png" class="img-responsive img-rounded" alt="feature img" style="height: 400px;"><p style="color: #fff;">[6]</p>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- end feature1 -->
+		<br>
+
+		<section id="contact" style="margin-bottom: 80px;">
+			<div class="overlay">
+				<div class="container">
+					
+					<label style="font-size: 32px; font-family: 'Open Sans', sans-serif; float: left;">Contact Me!</label>
+					<a type="submit" class="form-control text-uppercase" href="mailto:jasonfink09@gmail.com" style="text-decoration: none; font-size: 26px; text-align: center; color: #fff; background-color: #000029; border: 2px solid #fff; width: 50%; height: 50px; float: left; margin: 0 0 0 2em;">Send Email</a>
+				</div>
+			</div>
+		</section>
+
+
+		<script src="assets/js/jquery.js"></script>
+		<script src="assets/js/bootstrap.min.js"></script>
+		<script src="assets/js/wow.min.js"></script>
+		<script src="assets/js/jquery.singlePageNav.min.js"></script>
+		<script>
+			$(window).load(function () {
+				$('.preloader').fadeOut(1000);
+			});
+
+			$(function () {
+				new WOW().init();
+				$('.templatemo-nav').singlePageNav({
+					offset: 70
+				});
+
+				$('.navbar-collapse a').click(function () {
+					$(".navbar-collapse").collapse('hide');
+				});
+			})
+		</script>
+	</body>
+
+</html>
