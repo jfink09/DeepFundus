@@ -70,7 +70,7 @@
 				<div class="row">
 					<div class="col-md-6 wow fadeInLeft" data-wow-delay="0.6s" style="background-color: #000029; border-radius: 1em; box-shadow: -1px -1px 7px #34346470, 3px 3px 5px #13134870; color: #fff;">
 						<h2 class="text-uppercase">About The Model</h2>
-						<p>This website allows users to upload a fundus images and learn about it. The image is ran through a convolutional neural network (CNN) 
+						<p>This website allows users to upload fundus images and learn about them. The image is ran through a convolutional neural network (CNN) 
 							which is an algorithm that recognizes patterns in data, often image data. It learns about these patterns by turning the image data into 
 							tensors that is passed through various layers of the network where computations are performed to predict what the image is supposed to 
 							be by assigning a probability value between 0 and 1 to it and outputting the name of the disease with the highest probability. 
@@ -89,28 +89,8 @@
 							of the model, improvements I have made along the way, more about how the predictions work, and what I have tried regarding model 
 							deployment. I also have a section about how I plan to improve my model and get its test accuracy to over 90% as well as how I can 
 							potentially commercialize the model to be used in the real world.-->
-							<!--This 
-							CNN consists of two blocks made up of two 2-D convolutional layers that turn the image data into a tensor of outputs, two ReLU layers 
-							that apply a rectified linear unit function such that all negative inputs are converted to 0 as an output and all positive values 
-							increase linearly, and a 2-D max pooling layer. The ReLU layer performs well on non-linear data by applying nonlinearity. The max 
-							pooling layer reduces dimensionality of images by reducing the number of pixels in the output from the previous convolutional layer. 
-							These layers are usually added after convolutional layers. Finally, TinyVGG finishes with a classifer block that contains a flatten 
-							layer to flatten the dimensions into a tensor and a linear layer to get the outputs. This model performed poorly on my type of data, 
-							so I needed to switch models. Even with data augmentation, the model did not perform well.
-							<br><br>
-							After experimenting with TinyVGG, I decided to try applying transfer learning. I tried this with EfficientNet models such as 
-							EfficientNet-B0, EfficientNet-B2, EfficientNet-B7, and EfficinetNet-V2_L. EfficientNet is discussed thoughroughly in Mingxing Tan and 
-							Quoc V. Le's paper with Cornell University<sup>2</sup>. Finally, I came to the model I am currently working with, and that is ResNet50. 
-							So far, I found that this model performed best on my data, although it trains slowly. I have seen ResNet50 used in many medical imaging 
-							projects including projects within opththalmology. The image to the right is from my Python script showing what the ResNet50 
-							architecture looks like. ResNet50 is a 50 layer CNN that contains 48 convolutional layers, a max pooling layer that takes the maximum 
-							pixel value in a given batch, and an average pooling layer that takes the average value of all pixels in a given batch. This model
-							performed significantly better (over 98% training accuracy and over 70% test accuracy), but there is still a lot of room for improvement 
-							and experimentation to increase the test accuracy and overall performance of my model. I started with predicting diabetic retinopathy 
-							and have since increased the number of classes to 9 different diseases and a normal class. The diseases I currently am training the model 
-							on is diabetic retinopathy, pathological myopia, macular degeneration (dry and wet is combined for now), retinitis pigmentosa, macular hole, 
-							myelinated nerve fiber, choroidal nevus, central retinal vein occlusion (CRVO), and laser spots which is not a disease, but appears different 
-							from normal fundus images.-->
+							<!--
+							.-->
 							
 						</p>
 						<!--<p style="font-size: 10px; text-align: left; padding-left: 2em; color: rgba(255, 255, 255, 0.487);">[2]: 
@@ -133,17 +113,44 @@
 				<div class="row">
 					<div class="col-md-6 wow fadeInUp" data-wow-delay="0.6s">
 						<img src="assets/img/stats.png" class="img-responsive img-rounded" alt="feature img" style="height: 300px;"><p style="color: #fff;"></p>
+						<br>
+						<img src="assets/img/efficientnet.png" class="img-responsive img-rounded" alt="feature img" style="width: 450px;"><p style="color: #fff;"></p>
+						<br>
+						<img src="assets/img/efficientnetb7.png" class="img-responsive img-rounded" alt="feature img" style="width: 450px;">
 					</div>
 					<div class="col-md-6 wow fadeInUp" data-wow-delay="0.6s" style="background-color: #000029; border-radius: 1em; box-shadow: -1px -1px 7px #34346470, 3px 3px 5px #13134870; color: #fff; color: #fff;">
-						<h2 class="text-uppercase">Experimentation with TinyVGG</h2>
-						<p>I tried the TinyVGG architecture which consists of an input layer, convolutional
-							layers that contain the learned kernels (weights) that looks for features in images that are different from one another. A convolutional
-							neuron performs elementwise dot product operations with a unique kernel and the output of the previous layer's corresponding neuron. TinyVGG 
-							also containes the ReLU activation function to apply non-linearity which increases the accuracy of the model. There are max-pooling layers that use
-							a 2x2 kernel and a stride of 2 to discard activations that make TinyVGG computationally efficient and avoids overfitting. Finally, a flatten 
-							layer is included to conver 3-D layers into 1-D vectors. I tested this model with and without data augmentation and discovered even with augmentation,
-						the model needed a different architecture to perform well for these types of images. I also found from a research paper from Andreas Steiner et. al. at Cornell
-					University, that transfer learning should be used over data augmentation<sup>3</sup>. This is why I tried transfer learning next.</p>
+						<h2 class="text-uppercase">Experimentation</h2>
+						<h3>TinyVGG</h3>
+						<p>TinyVGG consists of two blocks made up of two 2-D convolutional layers that turn the image data into a tensor of outputs and that contain the learned 
+							kernels (weights) that looks for features in images that are different from one another, two ReLU 
+							activation function layers to apply non-linearity which increases the accuracy of the model, and a 2-D max pooling layer. The max 
+							pooling layer reduces dimensionality of images by reducing the number of pixels in the output from the previous convolutional layer. 
+							They use a 2x2 kernel and a stride of 2 to discard activations that make TinyVGG efficient and avoids overfitting. These layers are 
+							usually added after convolutional layers. Finally, TinyVGG finishes with a classifer block that contains a flatten 
+							layer to flatten the dimensions into a tensor and a linear layer to get the outputs. It converts 3-D layers into 1-D vectors. 
+							This model performed poorly on my type of data, so I needed to switch models. Even with data augmentation, the model did not perform 
+							well. Convolutional neurons perform elementwise dot product operations with a unique kernel and the output of the previous layer's 
+							corresponding neuron. A research paper from Andreas Steiner et. al. at Cornell University, stated that transfer learning should be 
+							used over data augmentation<sup>3</sup>. This is why I am applying transfer learning.</p>
+							<h3>EfficientNet</h3>
+							<p>After experimenting with TinyVGG, I decided to try applying transfer learning on EfficientNet. I tried this with EfficientNet-B0, 
+								EfficientNet-B2, EfficientNet-B7, and EfficinetNet-V2_L. EfficientNet is discussed thoughroughly in Mingxing Tan and 
+								Quoc V. Le's paper with Cornell University<sup>4</sup>. EfficientNet scales up models to increase efficency and accuracy by applying 
+								a compound coefficient. Conventional methods to scale a model include scaling dimensions such as width, depth, and resolution. However, 
+								EfficientNet scales up each dimension with a set of scaling coefficients. EfficentNet models achieve high accuracy and are smaller and 
+								faster making them very efficient. PyTorch has efficientnet_b0-b7. As b increases, so does the size of the model, and the time it takes 
+								to train the data. I also tried EfficientNetV2 which is a family of models that are smaller and train faster.</p>
+							<h3>ResNet50</h3>
+							<p>Finally, I came to the model I am currently working with, and that is ResNet50. So far, I found that this model performed best on my 
+								data, although it trains slowly. I have seen ResNet50 used in many medical imaging 
+								projects including projects within opththalmology. ResNet50 is a 50 layer CNN that contains 48 convolutional layers, a max pooling layer that takes the maximum 
+								pixel value in a given batch, and an average pooling layer that takes the average value of all pixels in a given batch. This model
+								performed significantly better (over 98% training accuracy and over 70% test accuracy), but there is still a lot of room for improvement 
+								and experimentation to increase the test accuracy and overall performance of my model. I started with predicting diabetic retinopathy 
+								and have since increased the number of classes to 9 different diseases and a normal class. The diseases I currently am training the model 
+								on is diabetic retinopathy, pathological myopia, macular degeneration (dry and wet is combined for now), retinitis pigmentosa, macular hole, 
+								myelinated nerve fiber, choroidal nevus, central retinal vein occlusion (CRVO), and laser spots which is not a disease, but appears different 
+								from normal fundus images</p>
 							<p style="font-size: 10px; text-align: left; padding-left: 2em; color: rgba(255, 255, 255, 0.487);">[3]: How to train your ViT? Data, Augmentation,
 								and Regularization in Vision Transformers. Available from: <a href="https://arxiv.org/pdf/2106.10270.pdf" target="_blank" style="color: rgba(255, 255, 255, 0.487);">https://arxiv.org/pdf/2106.10270.pdf</a> [accessed 15 Nov, 2022]
 					</div>
