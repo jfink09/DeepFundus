@@ -1,0 +1,1 @@
+pretrained_resnet50_feature_extractor_drappcompressed.pth filter=lfs diff=lfs merge=lfs -text
