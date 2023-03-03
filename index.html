@@ -1,154 +1,312 @@
+
+
 <!DOCTYPE html>
-<html lang="en" >
-<head>
-  <meta charset="UTF-8">
-  <title>MobileNet Image Classify</title>
-  <link rel="stylesheet" href="./style.css">
+<html lang="en">
 
-  <style>
+	<head>
+		<meta charset="utf-8">
+		<title>DeepFundus</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="keywords" content="">
+		<meta name="description" content="">
 
-      h3 {
-  margin-left: 15px;
-}
+		<link rel="stylesheet" href="assets/css/animate.min.css">
+		<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+		<link rel="stylesheet" href="assets/css/font-awesome.min.css">
+		<link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,700,800' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" href="assets/css/style.css">
 
-.fileInput {
-  margin: 15px;
-  cursor: pointer;
-  color: rgba(0,0,0,0);
-  width: 88px;
-  border: 1px solid #ccc;
-  display: inline-block;
-  padding: 6px 12px;
-}
+		<style>
+			</style>
+	</head>
 
-.imgPreview {
-  text-align: center;
-  margin: 5px 15px;
-  height: 200px;
-  width: 500px;
-  border-left: 1px solid #808080;
-  border-right: 1px solid #808080;
-  border-top: 5px solid #808080;
-  border-bottom: 5px solid #808080;
-}
-.imgPreview img {
+	<body>
+		<div class="preloader">
+			<div class="sk-spinner sk-spinner-rotating-plane"></div>
+		</div>
+		<nav class="navbar navbar-default navbar-fixed-top templatemo-nav" role="navigation" style="box-shadow: 5px 5px 10px #06080e;">
+			<div class="container">
+				<div class="navbar-header">
+					<button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+						<span class="icon icon-bar"></span>
+						<span class="icon icon-bar"></span>
+						<span class="icon icon-bar"></span>
+					</button>
+					<a href="#" class="navbar-brand">DeepFundus</a>
+				</div>
+				<div class="collapse navbar-collapse">
+					<ul class="nav navbar-nav navbar-right text-uppercase">
+						<li><a href="#home">Home</a></li>
+						<li><a href="#model">Model</a></li>
+						<li><a href="#about-model">About</a></li>
+						<li><a href="#experiment">Experimentation</a></li>
+						<li><a href="#improvements">Improvements</a></li>
+						<li><a href="#predictions">Predictions</a></li>
+						<li><a href="#contact">Contact</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
 
-  height: 100%;
-}
-.previewText {
-  width: 100%;
-  margin-top: 20px;
-}
-.submitButton {
-  padding: 12px;
-  margin-left: 10px;
-  background: #fff;
-  border: 4px solid #d3d3d3;
-  border-radius: 15px;
-  font-weight: 700;
-  font-size: 10pt;
-  cursor: pointer;
-}
-.submitButton:hover {
-  background: #efefef;
-}
-.centerText {
-  text-align: center;
-  width: 500px;
-}
-  </style>
-</head>
-<body>
-<!--------------------------------------------Code from Jeff Heaton---------------------------------------------------------------------------------->
-<!-- partial:index.partial.html -->
+		<section id="home">
+			<div class="overlay">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-1"></div>
+						<div class="col-md-10 wow fadeIn" data-wow-delay="0.3s">
+							<h1 class="text-upper">Deep Learning On Fundus Images</h1>
+							<p class="white">Diagnose Fundus Images with PyTorch Computer Vision</p>
+							<img src="assets/img/tinyvgg.png" class="img-responsive img-rounded" alt="home img" style="height: 400px; pointer-events: none;">
+							<p style="color: #fff;">[1]: Visualization from: <a href="https://poloclub.github.io/cnn-explainer/" target="_blank" style="color: #fff">https://poloclub.github.io/cnn-explainer/</a></p>
+						</div>
+						<div class="col-md-1"></div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<section id="model">
+			<div class="overlay">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-1" style="background-color: #0B0F19"></div>
+						<div class="col-md-10 wow fadeIn" data-wow-delay="0.3s" style="background-color: #0B0F19">
+							<iframe
+    							src="https://Jfink09-DeepFundus.hf.space"
+    							frameborder="0"
+    							width="800"
+    							height="575"
+								style="background-color: #0B0F19"
+								style="background: #FFFFFF;"
+								allowtransparency="true"
+							></iframe>
+		</section>
+		<section id="about-model">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6 wow fadeInLeft" data-wow-delay="0.6s" style="background-color: #0B0F19; border-radius: 1em; box-shadow:  5px 5px 10px #06080e,
+					-5px -5px 10px #101625; color: #fff;">
+						<h2 class="text-uppercase">About The Model</h2>
+						<p>This website allows users to upload fundus images and learn about them. The image is passed through a convolutional neural network (CNN) 
+							which is an algorithm that recognizes patterns in data, often image data. It learns about these patterns by turning the image data into 
+							tensors that are sent from neuron to neuron through various layers of the network. The tensors allow for computations to be performed on the images in order to learn 
+							relevant features from the images to predict what it is supposed to 
+							be. The predictions are assigned probability values between 0 and 1. The disease associated with the highest probability is outputted as the name of the disease.
+							I experimented with multiple CNNs starting with TinyVGG<sup>1</sup>. I also tried EfficientNet models and finally came to the ResNet50 
+							model which I 
+						 am currently using. The model's architecture is shown to the right<sup>2</sup>.
+							<br><br>
+							Once I can get a strong model that predicts diseases from fundus images with over 90%
+							accuracy, I will train a model for coherence tomography (OCT) images. <!--I aspire to create the largest platform for 
+							learning about retinal images. I plan to eventually have the reason's for the model's predictions pointed out on user uploaded images 
+							to show why the model assigned a given diagnosis to the images. I want to also include information regarding the disease useful to 
+							students and others interested in learning about retinal diseases. This would include what is necessary for a human to diagnose and 
+							treat the disease. It would also include information such as symptoms patient's typically experience with the disease and how to come up 
+							with treatment plans to follow patient's.-->
+							<!--<br><br>
+							In the following sections, I will go into great detail regarding what I have done regarding experimentation to improve the accuracy 
+							of the model, improvements I have made along the way, more about how the predictions work, and what I have tried regarding model 
+							deployment. I also have a section about how I plan to improve my model and get its test accuracy to over 90% as well as how I can 
+							potentially commercialize the model to be used in the real world.-->
+							<!--
+							.-->
+							
+						</p>
+						<!--<p style="font-size: 10px; text-align: left; padding-left: 2em; color: rgba(255, 255, 255, 0.487);">[2]: 
+							EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks. Available from: <a href="https://arxiv.org/pdf/1905.11946.pdf" target="_blank" style="color: rgba(255, 255, 255, 0.487);">https://arxiv.org/pdf/1905.11946.pdf</a> [accessed 15 Nov, 2022]
+					</p>-->
+					<p style="font-size: 5px; text-align: left; padding-left: 2em; color: rgba(255, 255, 255, 0.487);">[2]: 
+						ResNet50: Residual convolutional neural network for predicting response of transarterial chemoembolization in hepatocellular carcinoma from CT imaging - Scientific Figure on ResearchGate. Available from: <a href="https://www.researchgate.net/figure/The-architecture-of-ResNet50-and-deep-learning-model-flowchart-a-b-Architecture-of_fig1_334767096" target="_blank" style="color: rgba(255, 255, 255, 0.487);">
+							https://www.researchgate.net/figure/The-architecture-of-ResNet50-and-deep-learning-model-flowchart-a-b-Architecture-of_fig1_334767096</a>  [accessed 7 Feb, 2023]
+				</p>
+					</div>
+					<div class="col-md-6 wow fadeInRight" data-wow-delay="0.6s">
+						<img src="assets/img/resnet50.png" class="img-responsive img-rounded" alt="feature img" style="pointer-events: none;"><p style="color: #fff;">[2]</p>
+					</div>
+				</div>
+			</div>
+		</section>
+		<br><br><br><br><br>
+		<section id="experiment">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6 wow fadeInUp" data-wow-delay="0.6s">
+						<img src="assets/img/stats.png" class="img-responsive img-rounded" alt="feature img" style="height: 300px;"><p style="color: #fff;"></p>
+						<br>
+						<img src="assets/img/efficientnet.png" class="img-responsive img-rounded" alt="feature img" style="width: 450px;"><p style="color: #fff;"></p>
+						<br>
+						<img src="assets/img/efficientnetb7.png" class="img-responsive img-rounded" alt="feature img" style="width: 450px;">
+					</div>
+					<div class="col-md-6 wow fadeInUp" data-wow-delay="0.6s" style="background-color: #0B0F19; border-radius: 1em; box-shadow:  5px 5px 10px #06080e,
+					-5px -5px 10px #101625; color: #fff; color: #fff;">
+						<h2 class="text-uppercase">Experimentation</h2>
+						<h3>TinyVGG</h3>
+						<p>TinyVGG consists of two blocks made up of two 2-D convolutional layers, two ReLU 
+							activation function layers, and a 2-D max pooling layer. The convolutional layers turn the image data into a tensor of outputs which contains the learned 
+							kernels (weights). These kernels look for features in images that are different from one another. The ReLU layers apply non-linearity which increases the accuracy of the model. The max 
+							pooling layer reduces dimensionality of images by reducing the number of pixels in the output from the previous convolutional layer. 
+							They use a 2x2 kernel and a stride of 2 to discard activations that make TinyVGG efficient and avoids overfitting. These layers are 
+							usually added after convolutional layers. Finally, TinyVGG finishes with a classifer block that contains a flatten 
+							layer to flatten the dimensions into a tensor and a linear layer so that we can get the outputs. It converts 3-D layers into 1-D vectors. 
+							This model performed poorly on my type of data, so I needed to switch models. Even with data augmentation, the model did not perform 
+							well. It is too small. Convolutional neurons perform elementwise dot product operations with a unique kernel and the output of the previous layer's 
+							corresponding neuron. A research paper from Andreas Steiner et. al. at Cornell University, stated that transfer learning should be 
+							used over data augmentation<sup>3</sup>. This is why I am applying transfer learning.</p>
+							<h3>EfficientNet</h3>
+							<p>After experimenting with TinyVGG, I decided to try applying transfer learning on EfficientNet. I tried this with EfficientNet-B0, 
+								EfficientNet-B2, EfficientNet-B7, and EfficinetNet-V2_L. EfficientNet is discussed thoughroughly in Mingxing Tan and 
+								Quoc V. Le's paper with Cornell University<sup>4</sup>. EfficientNet scales up models to increase efficency and accuracy by applying 
+								a compound coefficient. Conventional methods to scale a model include scaling dimensions such as width, depth, and resolution. However, 
+								EfficientNet scales up each dimension with a set of scaling coefficients. EfficentNet models achieve high accuracy and are smaller and 
+								faster making them very efficient. PyTorch has efficientnet_b0-b7. As b increases, so does the size and accuracy of the model as well as the time it takes 
+								to train the data. Therefore, one needs to decide how much accuracy they want to sacrifice in order to train their data faster. I also tried EfficientNetV2 which 
+								is a family of models that are smaller and train faster.</p>
+							<h3>ResNet50</h3>
+							<p>Finally, I came to the model I am currently working with, and that is ResNet50. So far, I found that this model performed best on my 
+								data, although it trains slowly. I have seen ResNet50 used in many medical imaging 
+								projects including projects within opththalmology. ResNet50 is a 50 layer CNN that contains 48 convolutional layers, a max pooling layer that takes the maximum 
+								pixel value in a given batch, and an average pooling layer that takes the average value of all pixels in a given batch. This model, even though it currently overfits,
+								performed significantly better (over 98% training accuracy and over 70% test accuracy), but there is still a lot of room for improvement 
+								and experimentation to increase the test accuracy and overall performance of my model. I started with predicting diabetic retinopathy 
+								and have since increased the number of classes to nine different diseases and a normal class. The diseases I currently am training the model 
+								on is diabetic retinopathy, pathological myopia, macular degeneration (dry and wet is combined for now), retinitis pigmentosa, macular hole, 
+								myelinated nerve fiber, choroidal nevus, central retinal vein occlusion (CRVO), and laser spots which is not a disease, but appears different 
+								from normal fundus images</p>
+							<p style="font-size: 5px; text-align: left; padding-left: 2em; color: rgba(255, 255, 255, 0.487);">[3]: How to train your ViT? Data, Augmentation,
+								and Regularization in Vision Transformers. Available from: <a href="https://arxiv.org/pdf/2106.10270.pdf" target="_blank" style="color: rgba(255, 255, 255, 0.487);">https://arxiv.org/pdf/2106.10270.pdf</a> [accessed 15 Nov, 2022]
+					</div>
+				</div>
+			</div>
+		</section>
+		<br><br><br><br><br>
+		<section id="improvements" style="background-color: #0B0F19;">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6 wow fadeInLeft" data-wow-delay="0.6s" style="background-color: #0B0F19; border-radius: 1em; box-shadow:  5px 5px 10px #06080e,
+					-5px -5px 10px #101625; color: #fff; color: #fff;">
+						<h2 class="text-uppercase">Data Augmentation And Transfer Learning</h2>
+						<p>
+							Although data augmentation alone can improve a model's accuracy, I found that transfer learning combined with data augmentation suited my data 
+							well.
+							Transfer learning takes a model that was already trained with similar data and applying it to your own dataset with pre-trained weights. 
+							Transfer learning takes
+							the learned weights from an already trained model and uses them as a foundation to discover more accurate weights for your own data. This 
+							not only increased the accuracy of my model, but it also decreased the time it took to train with my own data. I will continue to imporve upon
+							this model by using more augmentation and larger datasets even though transfer learning allowed me to improve my
+							model without a huge dataset. I am currently working with over 1500 images between my training and testing data. The image to the right shows some 
+							ways in which my model augments its data. I found
+							the PyTorch documentation to be a good starting point for seeing how data augmentation and transfer learning can be applied in PyTorch<sup>4</sup>.
+						</p>
+            <p style="font-size: 5px; text-align: left; padding-left: 2em; color: rgba(255, 255, 255, 0.487);">[4]: 
+				Pre-trained models and weights - <a href="https://pytorch.org/vision/stable/models.html" target="_blank" style="color: rgba(255, 255, 255, 0.487);">https://pytorch.org/vision/stable/models.html</a>
+      </p>
+					</div>
+					<div class="col-md-6 wow fadeInRight" data-wow-delay="0.6s">
+						<img src="assets/img/augmentation.png" class="img-responsive img-rounded" alt="feature img" style="height: 600px;">
+					</div>
+				</div>
+			</div>
+		</section>
+		<br><br><br><br><br>
+		<section id="predictions">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6 wow fadeInUp" data-wow-delay="0.6s">
+						<img src="assets/img/dr.png" class="img-responsive img-rounded" alt="feature img" style="height: 375px;"><p style="color: #fff;"></p>
+						<img src="assets/img/myl.png" class="img-responsive img-rounded" alt="feature img" style="height: 355px;"><p style="color: #fff;"></p>
+						<img src="assets/img/nevus.png" class="img-responsive img-rounded" alt="feature img" style="height: 298px;"><p style="color: #fff;"></p>
+					</div>
+					<div class="col-md-6 wow fadeInUp" data-wow-delay="0.6s" style="background-color: #0B0F19; border-radius: 1em; box-shadow:  5px 5px 10px #06080e,
+					-5px -5px 10px #101625; color: #fff; color: #fff;">
+						<h2 class="text-uppercase">Prediction Probabilities (Test Set & Custom Images)</h2>
+						<p>To test how well the model performs qualitatively, I tested it by making predictions on images from the test set which consists of
+							images not seen by the model since they are not part of the training set as well as images not in the dataset. When the model was tested with new custom images not in the dataset, the model 
+							performed decent. The images to the left and below were all correctly predicted to have their corresponding diagnosis.
+							I view the prediction value to be a percentage of how confident the model is in its diagnosis. You can use a probabilistic classifier to predict a probability distribution over 
+							a set of classes. A probability value in machine learning indicates how often, in percent, the output should be correct. For example, the probability my model assigns 
+							diabetic retinopathy on the first image is a value of 0.589 which equates to the model predicting this diagnosis to be correct 58.9% of the time. For lower percentages, this can mean 
+							a lack of reliability in their outputs. This topic has become of interest in research especially regarding the softmax function that converts K real numbers into a probability distribution 
+							of K possible outcomes. I use the softmax function to turn the transformed fundus image prediction logits into prediction probabilities after the image is passed through the model.
+							After this model is further improved, I will add more diseases (classes) to train, test, and predict 
+							with to increase the usefulness of the model.
+							<br><br><br>
+							Finally, I discovered another challenge that presented itself during my experimentation phase. This challenge is a fundus image that consists of more than one diagnosis. 
+							Image [5] shows Coat's Disease that was diagnosed in an 11 year old male. The Coats Disease in this left eye image consists of subretinal fibrosis and exudation throughout the macula as well 
+							as hemorrhage with temporal light bulb aneurysms. There is a fibrous nodule with surrounding subretinal fluid in the inferior macula and additional fluid temporal to the macula. With these features, 
+							it would be reasonable for my model to predict either pathological myopia or diabetic retinopathy. Pathological myopia occurs in high myopic (greater than -6.00 diopters of refractive 
+							error) and is associated with poor visual accuity and degenerative changes such as the large white spots on the image. This patient's visual acuity was 20/300, so it would be unreasonable to assume their 
+							refractive error is larger than -6.00 diopters, but an image recognition software would overrule this with the myopic maculopathy. The AAO even states that the presence of myopic maculopathy at least as severe as 
+							diffuse chorioretinal atrophy can define true pathological myopia<sup>6</sup>. They state that this is a newer, more accurate way to diagnose pathological myopia and that definition benefits my model's diagnosis.
+							The image also includes exudates which are present in diabetic retinopathy, so it would be reasonable to assume the model could be confused 
+							by this and diagnose it as diabetic retinopathy. To avoid these issues, I may explore an approach that takes into account medical history to provide more accurate diagnoses.
+						</p>
+						<p style="font-size: 5px; text-align: left; padding-left: 2em; color: rgba(255, 255, 255, 0.487);">[5]: 
+							Coats Disease - <a href="https://eyerounds.org/cases/100-Coats-Disease.htm" target="_blank" style="color: rgba(255, 255, 255, 0.487);">https://eyerounds.org/cases/100-Coats-Disease.htm</a>
+				  </p>
+				  <p style="font-size: 5px; text-align: left; padding-left: 2em; color: rgba(255, 255, 255, 0.487);">[6]: 
+					Pathological Myopia (Myopic Degeneration) - <a href="https://eyewiki.aao.org/Pathologic_Myopia_(Myopic_Degeneration)#:~:text=Pathologic%20myopia%20represents%20a%20subgroup,during%20their%20most%20productive%20years." target="_blank" style="color: rgba(255, 255, 255, 0.487);">https://eyewiki.aao.org/Pathologic_Myopia_(Myopic_Degeneration)#:~:text=Pathologic%20myopia%20represents%20a%20subgroup,during%20their%20most%20productive%20years.</a>
+		  </p>
+							<!--<p style="font-size: 5px; text-align: left; padding-left: 2em; color: rgba(255, 255, 255, 0.487);">[1] and [2] from: Aortic Shear Stress in Bicuspid Aortic Valve Patients with Stenosis and Insufficiency - 
+								Scientific Figure on ResearchGate. Available from: https://www.researchgate.net/figure/Representative-
+								Images-and-Analytical-Planes-for-4D-Flow-MRI-AAo-indicated-ascending_fig1_313590220 [accessed 4 Sep, 2022]
+							<br>
+						[3] from: Incidental Non-Cardiac Findings of a Coronary Angiography with a 128-Slice Multi-Detector CT Scanner: 
+						Should We Only Concentrate on the Heart? - Scientific Figure on ResearchGate. Available from: https://www.researchgate.net
+						/figure/Aneurysm-of-ascending-aorta-measuring-4748-cm-incidentally-found-in-62-year-old-man_fig5_40834553 [accessed 4 Sep, 2022]</p>-->
+					</div>
+				</div>
+			</div>
+		</section>
+		<br><br>
+		<section id="predictions">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-4 wow fadeInUp" data-wow-delay="0.6s">
+						<img src="assets/img/crvo.png" class="img-responsive img-rounded" alt="feature img" style="height: 250px;"><!--<p style="color: #fff;">[5]</p>-->
+					</div>
+					<div class="col-md-4 wow fadeInUp" data-wow-delay="0.6s">
+					<img src="assets/img/935prob.png" class="img-responsive img-rounded" alt="feature img" style="height: 252px; margin: 0 0 0 35px;"><!--<p style="color: #fff; margin: 0 0 0 25px;">[6]</p>-->
+					</div>
+					<div class="col-md-4 wow fadeInUp" data-wow-delay="0.6s">
+						<img src="assets/img/tricky.png" class="img-responsive img-rounded" alt="feature img" style="height: 252px;"><p style="color: #fff;">[5]</p>
+						</div>
+				</div>
+			</div>
+		</section>
+		<!-- end feature1 -->
+		<br>
 
-<h3>Retina Disease Classifier</h3>
-<div id="mainApp"></div>
-<!-- partial -->
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react.min.js'></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react-dom.min.js'></script>
-<script  src="./script.js"></script>
-
-</body>
-
-<script>
-    class ImageUpload extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { file: '', imagePreviewUrl: '', message: '' };
-  }
-
-  _handleSubmit(e) {
-    e.preventDefault();
-    return new Promise((resolve, reject) => {
-      let imageFormData = new FormData();
-  
-      imageFormData.append('image', this.state.file);
-      
-      var xhr = new XMLHttpRequest();
-      var z = this;
-      
-      xhr.open('post', '/api/image', true);
-      
-      xhr.onload = function () {
-        if (this.status == 200) {
-          var msg = JSON.parse(this.response)
-          console.log("**" + msg.pred[0].name + msg.pred[0].prob)
-          var prob = Math.round(msg.pred[0].prob * 100)
-          z.setState({message:`Recognized "${msg.pred[0].name}", probability: ${prob}%.`})
-          resolve(this.response);
-        } else {
-          reject(this.statusText);
-        }
-      };
-      
-      xhr.send(imageFormData);
-  
-    });
-  }
-
-  _handleImageChange(e) {
-    e.preventDefault();
-
-    let reader = new FileReader();
-    let file = e.target.files[0];
-
-    reader.onloadend = () => {
-      this.setState({
-        file: file,
-        message: '',
-        imagePreviewUrl: reader.result });
-    };
-
-    reader.readAsDataURL(file);
-  }
-
-  render() {
-    let { imagePreviewUrl } = this.state;
-    let $imagePreview = null;
-    if (imagePreviewUrl) {
-      $imagePreview = React.createElement("img", { src: imagePreviewUrl });
-    } else {
-      $imagePreview = React.createElement("div", { className: "previewText"}, "Upload A Funduscopic Image for Preview");
-    }
-
-    return (
-      React.createElement("div", { className: "previewComponent" },
-      React.createElement("form", { onSubmit: e => this._handleSubmit(e) },
-      React.createElement("input", { className: "fileInput",
-        type: "file",
-        onChange: e => this._handleImageChange(e) }),
-      React.createElement("button", { className: "submitButton",
-        type: "submit",
-        onClick: e => this._handleSubmit(e) }, "Recognize Image")),
-      React.createElement("div", { className: "imgPreview" },$imagePreview),
-      React.createElement("span", {}, this.state.message),
-      )
-      );
-  }}
+		<section id="contact" style="margin-bottom: 80px;">
+			<div class="overlay">
+				<div class="container">
+					
+					<label style="font-size: 32px; font-family: 'Open Sans', sans-serif; float: left;">Contact Me!</label>
+					<a type="submit" class="form-control text-uppercase" href="mailto:jasonfink09@gmail.com" style="text-decoration: none; font-size: 26px; text-align: center; color: #fff; background-color: #0B0F19; border: 2px solid #fff; width: 50%; height: 50px; float: left; margin: 0 0 0 2em;">Send Email</a>
+				</div>
+			</div>
+		</section>
 
 
-ReactDOM.render(React.createElement(ImageUpload, null), document.getElementById("mainApp"));
+		<script src="assets/js/jquery.js"></script>
+		<script src="assets/js/bootstrap.min.js"></script>
+		<script src="assets/js/wow.min.js"></script>
+		<script src="assets/js/jquery.singlePageNav.min.js"></script>
+		<script>
+			$(window).load(function () {
+				$('.preloader').fadeOut(1000);
+			});
 
-</script>
+			$(function () {
+				new WOW().init();
+				$('.templatemo-nav').singlePageNav({
+					offset: 70
+				});
+
+				$('.navbar-collapse a').click(function () {
+					$(".navbar-collapse").collapse('hide');
+				});
+			})
+		</script>
+	</body>
+
 </html>
