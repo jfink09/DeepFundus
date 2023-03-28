@@ -18,6 +18,91 @@
 		<link rel="stylesheet" href="assets/css/style.css">
 
 		<style>
+
+#model {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* Default styles */
+/*.responsive-iframe {
+  width: 100%;
+  height: calc(70vw);
+  max-height: calc(1100px);
+}*/
+
+/* Default styles */
+.responsive-iframe {
+  width: 100%;
+  height: calc(40vw);
+  max-height: calc(900px);
+}
+
+/* Styles for screens 1280px wide and smaller */
+@media screen and (max-width: 1280px) {
+  .responsive-iframe {
+    height: calc(45vw);
+    max-height: none;
+  }
+}
+
+/* Styles for screens 1024px wide and smaller */
+@media screen and (max-width: 1024px) {
+  .responsive-iframe {
+    height: calc(90vw);
+    max-height: none;
+  }
+}
+
+/* Styles for screens 820px wide and smaller */
+@media screen and (max-width: 820px) {
+  .responsive-iframe {
+    height: calc(110vw);
+    max-height: none;
+  }
+}
+
+/* Styles for screens smaller than 768px */
+@media (max-width: 768px) {
+  .responsive-iframe {
+    height: calc(118vw);
+    max-height: none;
+  }
+}
+
+/* Styles for screens smaller than 414px */
+@media (max-width: 414px) {
+  .responsive-iframe {
+    height: calc(218vw);
+    max-height: none;
+  }
+}
+
+/* Styles for screens smaller than 412px */
+@media (max-width: 412px) {
+  .responsive-iframe {
+    height: calc(240vw);
+    max-height: none;
+  }
+}
+
+/* Styles for screens smaller than 393px */
+@media (max-width: 393px) {
+  .responsive-iframe {
+    height: calc(260vw);
+    max-height: none;
+  }
+}
+
+/* Styles for screens smaller than 360px */
+@media (max-width: 360px) {
+  .responsive-iframe {
+    height: calc(270vw);
+    max-height: none;
+  }
+}
 			</style>
 	</head>
 
@@ -57,8 +142,8 @@
 						<div class="col-md-10 wow fadeIn" data-wow-delay="0.3s">
 							<h1 class="text-upper">Deep Learning On Fundus Images</h1>
 							<p class="white">Diagnose Fundus Images with PyTorch Computer Vision</p>
-							<img src="assets/img/tinyvgg.png" class="img-responsive img-rounded" alt="home img" style="height: 400px; pointer-events: none;">
-							<p style="color: #fff;">[1]: Visualization from: <a href="https://poloclub.github.io/cnn-explainer/" target="_blank" style="color: #fff">https://poloclub.github.io/cnn-explainer/</a></p>
+							<img src="assets/img/tinyvgg.png" class="img-responsive img-rounded img-main" alt="home img">
+							<p style="color: #fff;">[1]: Visualization of the TinyVGG architecture from: <a href="https://poloclub.github.io/cnn-explainer/" target="_blank" style="color: #fff">https://poloclub.github.io/cnn-explainer/</a></p>
 						</div>
 						<div class="col-md-1"></div>
 					</div>
@@ -71,15 +156,13 @@
 					<div class="row">
 						<div class="col-md-1" style="background-color: #0B0F19"></div>
 						<div class="col-md-10 wow fadeIn" data-wow-delay="0.3s" style="background-color: #0B0F19">
-							<iframe
-    							src="https://Jfink09-DeepFundus.hf.space"
-    							frameborder="0"
-    							width="800"
-    							height="575"
-								style="background-color: #0B0F19"
-								style="background: #FFFFFF;"
-								allowtransparency="true"
-							></iframe>
+							<div class="gradio-container"> 
+								<iframe class="responsive-iframe" src="https://Jfink09-DeepFundus.hf.space" style="background-color:#0B0F19; border: none;"></iframe>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</section>
 		<section id="about-model">
 			<div class="container">
@@ -244,7 +327,7 @@
 							Coats Disease - <a href="https://eyerounds.org/cases/100-Coats-Disease.htm" target="_blank" style="color: rgba(255, 255, 255, 0.487);">https://eyerounds.org/cases/100-Coats-Disease.htm</a>
 				  </p>
 				  <p style="font-size: 5px; text-align: left; padding-left: 2em; color: rgba(255, 255, 255, 0.487);">[6]: 
-					Pathological Myopia (Myopic Degeneration) - <a href="https://eyewiki.aao.org/Pathologic_Myopia_(Myopic_Degeneration)#:~:text=Pathologic%20myopia%20represents%20a%20subgroup,during%20their%20most%20productive%20years." target="_blank" style="color: rgba(255, 255, 255, 0.487);">https://eyewiki.aao.org/Pathologic_Myopia_(Myopic_Degeneration)#:~:text=Pathologic%20myopia%20represents%20a%20subgroup,during%20their%20most%20productive%20years.</a>
+					Pathological Myopia (Myopic Degeneration) - <a href="https://eyewiki.aao.org/Pathologic_Myopia_(Myopic_Degeneration)#:~:text=Pathologic%20myopia%20represents%20a%20subgroup,during%20their%20most%20productive%20years." target="_blank" style="color: rgba(255, 255, 255, 0.487);">https://eyewiki.aao.org/Pathologic_Myopia_(Myopic_Degeneration).</a>
 		  </p>
 							<!--<p style="font-size: 5px; text-align: left; padding-left: 2em; color: rgba(255, 255, 255, 0.487);">[1] and [2] from: Aortic Shear Stress in Bicuspid Aortic Valve Patients with Stenosis and Insufficiency - 
 								Scientific Figure on ResearchGate. Available from: https://www.researchgate.net/figure/Representative-
@@ -279,9 +362,10 @@
 		<section id="contact" style="margin-bottom: 80px;">
 			<div class="overlay">
 				<div class="container">
-					
-					<label style="font-size: 32px; font-family: 'Open Sans', sans-serif; float: left;">Contact Me!</label>
-					<a type="submit" class="form-control text-uppercase" href="mailto:jasonfink09@gmail.com" style="text-decoration: none; font-size: 26px; text-align: center; color: #fff; background-color: #0B0F19; border: 2px solid #fff; width: 50%; height: 50px; float: left; margin: 0 0 0 2em;">Send Email</a>
+					<!--<label style="font-size: 32px; font-family: 'Open Sans', sans-serif; float: left;"></label>-->
+					<a type="submit" class="form-control text-uppercase" href="mailto:jasonfink09@gmail.com" style="text-decoration: none; font-size: 26px; text-align: center; color: #fff; background-color: #0B0F19; border: 2px solid #fff; width: 50%; height: 100%; text-align: center;
+					display:inline-block;
+					margin:0 auto;">Contact Me!</a>
 				</div>
 			</div>
 		</section>
